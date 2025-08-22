@@ -406,6 +406,7 @@
         // Initialize game
         const game = new Game();
 
+        
         // === Music & Sound ===
         const lobbyMusic = new Audio('music/lobby-sound.mp3');
         lobbyMusic.loop = true;
