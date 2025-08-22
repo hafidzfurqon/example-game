@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <title>Math Tower Blocks</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+     <div id="container" class="ready">
+        <div id="game"></div>
+
+        <div id="score">
+            <div style="font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">Skor</div>
+            <div id="score-value">0</div>
+        </div>
+
+        <div id="instructions">
+            <strong>🧮 Math Tower Blocks</strong><br>
+            Jawab pertanyaan matematika dengan benar untuk menumpuk balok setinggi mungkin!
+        </div>
+
+        <div class="game-ready">
+            <h1>🧮 Math Tower</h1>
+            <div class="game-buttons">
+                <div id="start-button">Mulai Bermain</div>
+                <div id="tutorial-button">Cara Bermain</div>
+            </div>
+        </div>
+
+        <div id="math-question">
+            <h3>🤔 Manakah Jawaban Yang Benar</h3>
+            <div id="question-text">2 + 3 = ?</div>
+            <div class="answer-options">
+                <button class="answer-btn" onclick="selectAnswer(0)">4</button>
+                <button class="answer-btn" onclick="selectAnswer(1)">5</button>
+                <button class="answer-btn" onclick="selectAnswer(2)">6</button>
+                <button class="answer-btn" onclick="selectAnswer(3)">7</button>
+            </div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="game-over">
+            <h2>🏆 Game Over!</h2>
+            <p>Pertanyaan yang berhasil dijawab:</p>
+            <p id="final-score">0</p>
+            <p>Selamat! Kamu berhasil menumpuk <span id="final-blocks">0</span> balok!</p>
+            <button class="restart-btn" onclick="game.restartGame()">🔄 Main Lagi</button>
+            <button class="redirect-btn">➡️ Kembali Ke E-Learning</button>
+        </div>
+    </div>
+
+    <!-- Modal Tutorial -->
+    <div id="tutorial-modal" class="tutorial-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeTutorial()">&times;</button>
+
+            <div class="modal-header">
+                <h2>📚 Cara Bermain Math Tower</h2>
+            </div>
+
+            <div class="tutorial-content">
+                <div class="tutorial-step">
+                    <h3>🎯 Tujuan Permainan</h3>
+                    <p>Bangun menara setinggi mungkin dengan menjawab soal matematika dengan benar!</p>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>🧮 Jenis Soal Matematika</h3>
+                    <p>Soal akan semakin sulit seiring dengan level yang meningkat:</p>
+                    <div class="tutorial-examples">
+                        <div class="example-math">5 + 3 = ?</div>
+                        <div class="example-math">12 - 7 = ?</div>
+                        <div class="example-math">4 × 6 = ?</div>
+                        <div class="example-math">15 ÷ 3 = ?</div>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>⚡ Cara Main</h3>
+                    <p>• Jawab soal matematika yang muncul</p>
+                    <p>• Pilih jawaban yang benar dari 4 pilihan</p>
+                    <p>• Setiap jawaban benar = +1 balok menara</p>
+                    <p>• Jawaban salah = game over</p>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>🏆 Tips Bermain</h3>
+                    <p>• Baca soal dengan teliti</p>
+                    <p>• Hitung dengan cermat sebelum memilih</p>
+                    <p>• Soal akan bertambah sulit setiap level</p>
+                    <p>• Raih skor setinggi mungkin!</p>
+                </div>
+
+                <div class="tutorial-step">
+                    <h3>🎵 Kontrol Audio</h3>
+                    <p>Gunakan tombol 🔊/🔇 di pojok kanan bawah untuk mengatur suara permainan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="music-toggle" class="music-btn">🔊</button>
+    <script src="index.js"></script>
+</body>
+
+</html>

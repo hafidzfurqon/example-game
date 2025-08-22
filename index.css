@@ -1,0 +1,560 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html, body {
+height: 100%;
+width: 100%;
+font-family: "Poppins", sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+overflow: hidden;
+}
+
+#container {
+width: 100%;
+height: 100%;
+position: relative;
+}
+
+#game {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+}
+
+#score {
+position: absolute;
+top: 20px;
+right: 20px;
+font-size: 3rem;
+font-weight: 700;
+color: white;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+z-index: 100;
+background: rgba(255,255,255,0.1);
+padding: 10px 20px;
+border-radius: 15px;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.2);
+}
+
+#instructions {
+position: absolute;
+top: 20px;
+left: 20px;
+color: white;
+font-size: 1.2rem;
+background: rgba(255,255,255,0.1);
+padding: 15px 20px;
+border-radius: 15px;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.2);
+max-width: 300px;
+opacity: 1;
+transition: all 0.5s ease;
+z-index: 100;
+}
+
+#instructions.hide {
+opacity: 0;
+transform: translateY(-20px);
+}
+
+.game-ready {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: rgba(0,0,0,0.7);
+backdrop-filter: blur(10px);
+z-index: 1000;
+}
+
+.game-ready h1 {
+font-size: 4rem;
+font-weight: 700;
+color: white;
+margin-bottom: 30px;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+background-size: 400% 400%;
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: gradientShift 3s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+0% { background-position: 0% 50%; }
+100% { background-position: 100% 50%; }
+}
+
+#start-button {
+padding: 15px 40px;
+font-size: 1.5rem;
+font-weight: 600;
+color: white;
+background: linear-gradient(45deg, #667eea, #764ba2);
+border: none;
+border-radius: 25px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+#start-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+}
+
+
+/* CSS untuk Modal Cara Bermain */
+.tutorial-modal {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+backdrop-filter: blur(5px);
+animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+margin: 5% auto;
+padding: 30px;
+border-radius: 20px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+width: 90%;
+max-width: 500px;
+max-height: 80vh;
+overflow-y: auto;
+position: relative;
+color: white;
+animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+text-align: center;
+margin-bottom: 20px;
+border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+padding-bottom: 15px;
+}
+
+.modal-header h2 {
+font-size: 1.8em;
+margin: 0;
+color: #fff;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+position: absolute;
+top: 25px;
+right: 15px;
+font-size: 28px;
+font-weight: bold;
+color: white;
+background: none;
+border: none;
+cursor: pointer;
+padding: 5px;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+background-color: rgba(255, 255, 255, 0.2);
+transform: rotate(90deg);
+}
+
+.tutorial-content {
+line-height: 1.6;
+font-size: 1em;
+}
+
+.tutorial-step {
+margin-bottom: 20px;
+padding: 15px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 10px;
+border-left: 4px solid #ffd700;
+backdrop-filter: blur(10px);
+}
+
+.tutorial-step h3 {
+margin: 0 0 10px 0;
+font-size: 1.2em;
+color: #ffd700;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.tutorial-step p {
+margin: 5px 0;
+opacity: 0.9;
+}
+
+.tutorial-examples {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+gap: 10px;
+margin-top: 10px;
+}
+
+.example-math {
+background: rgba(255, 255, 255, 0.15);
+padding: 8px;
+border-radius: 8px;
+text-align: center;
+font-weight: bold;
+font-size: 0.9em;
+}
+
+.game-buttons {
+display: flex;
+gap: 15px;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.game-buttons>div {
+cursor: pointer;
+padding: 12px 24px;
+border-radius: 12px;
+font-weight: bold;
+transition: all 0.3s ease;
+user-select: none;
+font-size: 1em;
+min-width: 140px;
+text-align: center;
+}
+
+#tutorial-button {
+padding: 15px 40px;
+font-size: 1.5rem;
+font-weight: 600;
+color: white;
+background: linear-gradient(45deg, #66ea90, #4b61a2);
+border: none;
+border-radius: 25px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+#tutorial-button:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 35px rgba(102, 234, 190, 0.6);
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+
+to {
+opacity: 1;
+}
+}
+
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(-50px) scale(0.9);
+}
+
+to {
+opacity: 1;
+transform: translateY(0) scale(1);
+}
+}
+
+@media (max-width: 600px) {
+.modal-content {
+margin: 10% auto;
+padding: 20px;
+width: 95%;
+}
+
+.tutorial-examples {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.game-buttons {
+flex-direction: column;
+align-items: center;
+}
+
+.game-buttons>div {
+width: 100%;
+max-width: 200px;
+}
+}
+
+
+#math-question {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: rgba(255,255,255,0.95);
+backdrop-filter: blur(20px);
+border-radius: 20px;
+padding: 40px;
+box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+max-width: 600px;
+width: 90%;
+text-align: center;
+z-index: 1500;
+display: none;
+border: 2px solid rgba(255,255,255,0.3);
+}
+
+#math-question h3 {
+font-size: 2rem;
+color: #333;
+margin-bottom: 25px;
+font-weight: 600;
+}
+
+#question-text {
+font-size: 2.5rem;
+font-weight: 700;
+color: #667eea;
+margin-bottom: 30px;
+background: linear-gradient(45deg, #667eea, #764ba2);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.answer-options {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+margin-top: 25px;
+}
+
+.answer-btn {
+padding: 15px 20px;
+font-size: 1.3rem;
+font-weight: 600;
+background: linear-gradient(45deg, #ff6b6b, #feca57);
+color: white;
+border: none;
+border-radius: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.answer-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.answer-btn.correct {
+background: linear-gradient(45deg, #55a3ff, #003d82);
+animation: correctPulse 0.6s ease;
+}
+
+.answer-btn.wrong {
+background: linear-gradient(45deg, #ff4757, #c44569);
+animation: wrongShake 0.6s ease;
+}
+
+@keyframes correctPulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.1); }
+}
+
+@keyframes wrongShake {
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-5px); }
+75% { transform: translateX(5px); }
+}
+
+.game-over {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: none;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: rgba(0,0,0,0.8);
+backdrop-filter: blur(15px);
+z-index: 1000;
+color: white;
+text-align: center;
+}
+
+.game-over h2 {
+font-size: 3.5rem;
+font-weight: 700;
+margin-bottom: 20px;
+color: #ff6b6b;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.game-over p {
+font-size: 1.5rem;
+margin-bottom: 15px;
+opacity: 0.9;
+}
+
+#final-score {
+font-size: 4rem !important;
+font-weight: 700;
+color: #feca57;
+margin: 20px 0;
+}
+
+.restart-btn {
+padding: 15px 40px;
+font-size: 1.3rem;
+font-weight: 600;
+background: linear-gradient(45deg, #48dbfb, #0abde3);
+color: white;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+margin-top: 20px;
+transition: all 0.3s ease;
+box-shadow: 0 8px 25px rgba(72, 219, 251, 0.4);
+}
+
+.restart-btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 35px rgba(72, 219, 251, 0.6);
+}
+
+.redirect-btn {
+padding: 15px 40px;
+font-size: 1.3rem;
+font-weight: 600;
+background: linear-gradient(45deg, #fb4848, #e30a0a);
+color: white;
+border: none;
+border-radius: 25px;
+cursor: pointer;
+margin-top: 20px;
+transition: all 0.3s ease;
+box-shadow: 0 8px 25px rgba(251, 72, 72, 0.4);
+}
+
+.redirect-btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 35px rgba(251, 72, 72, 0.6);
+}
+
+.feedback {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 3rem;
+font-weight: 700;
+padding: 20px 40px;
+border-radius: 20px;
+z-index: 2000;
+display: none;
+backdrop-filter: blur(10px);
+border: 2px solid rgba(255,255,255,0.3);
+}
+
+.feedback.correct {
+background: rgba(46, 213, 115, 0.9);
+color: white;
+}
+
+.feedback.wrong {
+background: rgba(255, 71, 87, 0.9);
+color: white;
+}
+
+/* State classes */
+#container.ready .game-ready { display: flex; }
+#container.playing .game-ready { display: none; }
+#container.ended .game-over { display: flex; }
+#container.question #math-question { display: block; }
+
+.music-btn {
+position: fixed;
+top: 15px;
+right: 15px;
+background: rgba(255, 255, 255, 0.8);
+border: none;
+border-radius: 50%;
+padding: 10px;
+font-size: 1.5rem;
+cursor: pointer;
+z-index: 1000;
+}
+
+.music-btn:hover {
+background: rgba(255, 255, 255, 1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+#score {
+top: 10px;
+right: 10px;
+font-size: 2rem;
+padding: 8px 15px;
+}
+
+#instructions {
+top: 10px;
+left: 10px;
+font-size: 1rem;
+padding: 10px 15px;
+max-width: 250px;
+}
+
+.game-ready h1 {
+font-size: 2.5rem;
+}
+
+#math-question {
+padding: 25px;
+width: 95%;
+}
+
+#question-text {
+font-size: 2rem;
+}
+
+.answer-btn {
+font-size: 1.1rem;
+padding: 12px 15px;
+}
+}
